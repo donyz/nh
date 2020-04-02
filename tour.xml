@@ -1,0 +1,323 @@
+﻿<krpano version="1.19" title="蒲缇烘焙">
+
+	<include url="skin/vtourskin.xml" />
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               gyro="true"
+	               webvr="false"
+	               webvr_gyro_keeplookingdirection="false"
+	               webvr_prev_next_hotspots="false"
+	               littleplanetintro="true"
+	               title="false"
+	               thumbs="false"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="false"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="请稍候"
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-1"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin_light.png"
+	               design_bgcolor="0x000000"
+	               design_bgalpha="0.0"
+	               design_bgborder="0"
+	               design_bgroundedge="3"
+	               design_bgshadow="0 4 10 0x000000 0.0"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Microsoft YaHei;"
+	               design_text_shadow="0"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+	<layer name="startpic_container"
+			preload="true"
+			alpha="1"
+			handcursor="true"
+			enabled="true"
+			children="true"
+			visible="true"
+			zorder="90"
+			type="container"
+			maskchildren="true"
+			keep="true"
+			width="100%"
+			height="100%"
+			bgcolor="0xFFFFFF"
+			bgalpha="1" >
+	
+	<layer name="skin_title_logo3"
+			zorder="100"
+			keep="true"
+			x="0"
+			y="0"
+			align="center"
+			url="img/ui/intro.jpg"
+			width="100%"
+			height="100%"
+			scale="1"
+			alpha="0"
+			onloaded="tween(alpha,1.0);tween(layer[skin_title_pr].alpha,1.0);"
+			onclick="tween(layer[startpic_container].alpha,0,0.5);
+			delayedcall(2,set(layer[startpic_container].enabled,false);
+			set(layer[startpic_container].visible,false));
+			stopdelayedcall(startpic1);stopdelayedcall(startpic2);"
+			enabled="false"
+	/>
+	<layer name="skin_title_pr"
+			background="true"
+			backgroundcolor="0x999999"
+			roundedge="10"
+			backgroundalpha="0"
+			border="true"
+			bordercolor="0x999999"
+			borderalpha="0"
+			borderwidth="4.0"
+			glow="0"
+			glowcolor="0xCCCCCC"
+			visible="false"
+			keep="true"
+			alpha="0"
+			onloaded=""
+			children="false"
+			align="center"
+			zorder="100"
+			autowidth="auto"
+			height="32"
+			url="%SWFPATH%/plugins/textfield.swf"
+			html="蒲缇烘焙屋"
+			css="text-align:center; color:#333333; font-family:Arial; font-weight:regular; font-size:18px;"
+			x="0"
+			y="225"
+			onclick="tween(layer[startpic_container].alpha,0,1);
+			delayedcall(2,set(layer[startpic_container].enabled,false);
+			set(layer[startpic_container].visible,false));
+			stopdelayedcall(startpic1);stopdelayedcall(startpic2);"
+			enabled="false"
+	/>
+</layer>
+	<events name="startlogoevents" keep="true"
+			onloadcomplete="
+			ifnot(layer[skin_title_logo3].enabled,
+			set(layer[skin_title_logo3].enabled,true);
+			
+			set(layer[skin_title_pr].enabled,true);
+			delayedcall(startpic1,1.5,tween(layer[startpic_container].alpha,0,1));
+			delayedcall(startpic2,2,set(layer[startpic_container].enabled,false);set(layer[startpic_container].visible,false));)
+	"/>
+	<!-- loading percent events -->
+	<events name="loadingpercent" keep="true"
+			onxmlcomplete="loadingpercent_startloading();"
+			onloadcomplete="delayedcall(0.25, loadingpercent_stoploading() );"
+	/>
+	<!-- loading percent actions -->
+	<action name="loadingpercent_startloading">
+			set(loadingpercent_isloading, true);
+			set(layer[skin_title_pr].visible, true);
+
+			asyncloop(loadingpercent_isloading,
+				mul(pv, progress.progress, 100);
+				roundval(pv,0);
+				txtadd(layer[skin_title_pr].html,  get(pv), '%');
+			);
+	</action>
+
+	<action name="loadingpercent_stoploading">
+		set(loadingpercent_isloading, false);
+		
+		<!-- set(layer[skin_title_pr].visible, false); -->
+	</action>
+	<!--hotspot -->
+	<style name="hotspot_ani_white"
+	       url="skin/hotspot_ani_white_40x40x20.png"
+	       crop="0|0|40|40"
+	       frames="20" framewidth="40" frameheight="40" frame="0"
+	       onloaded="hotspot_animate();"
+	       />
+	<action name="hotspot_animate">
+			if(loaded,
+				inc(frame,1,get(frames),0);
+				mul(ypos,frame,frameheight);
+				txtadd(crop,'0|',get(ypos),'|',get(framewidth),'|',get(frameheight));
+				delayedcall(0.03, hotspot_animate() );
+			);
+	</action>
+	<!--hotspot -->
+
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+			if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+			loadscene(get(startscene), null, MERGE);
+			if(startactions !== null, startactions() );
+			global s=true;
+			skin_hideskin();
+	</action>
+
+	<action name="showname">
+		for(set(i,64),i LT plugin.count,inc(i),
+		if(s,tween(plugin[get(i)].alpha,0,0.55),tween(plugin[get(i)].alpha,1,0.55)));
+		if(s,set(s,false),set(s,true));
+	</action>
+	<layer name="logo" url="img/ui/kfz_white_100.png" align="lefttop" x="16" y="20" width="72" height="45" keep="true" enabled="false" children="false" scalechildren="true" destscale="1.0" />
+	<layer name="shownamebtn" url="img/ui/showname.png" align="righttop" x="16" y="20" width="50" height="30" keep="true" enabled="true" children="false" scalechildre="true" destscale="1.0" onclick="showname()"/>
+	<scene name="scene_vs" title="蒲缇烘焙屋" onstart="" thumburl="panos/vs.tiles/thumb.jpg" lat="" lng="" heading="">
+		<view hlookat="-30" vlookat="-0" fovtype="MFOV" fov="80" maxpixelzoom="1.0" mixpixelzoom="1.0" fovmin="65" fovmax="85" limitview="true" stereographic="false" vlookatmin="-10" vlookatmax="10"/>
+		<preview url="panos/vs.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/vs.tiles/pano_%s.jpg" />
+		</image>
+		<layer name="iframelayer"
+					url="skin/vignetting.png"
+					align="center"
+					width="80%"
+					height="80%"
+					y="20%"
+					alpha="0"
+					zorder="10"
+					visible="false"
+				>
+				<layer name="closeiframe_button" 
+					url="img/ui/close_line.png" 
+					align="righttop" 
+					zorder="0" 
+					x="10" 
+					y="8" 
+					width="24" 
+					height="24" 
+					onclick="fadeout_iframe()
+						"/>  
+		</layer> 
+		<layer name="bg" 
+				background="true"
+				backgroundcolor="0x000000"
+				backgroundalpha="0.3"
+				url="skin/vignetting.png"
+				visible="false"
+				enabled="false"
+				zorder="1"
+				keep="true"
+				x="0"
+				y="0"
+				width="100%"
+				height="100%"
+				onclick="fadeout_iframe()"/>
+		<style name="buttonstyle"  keep="true" url="%SWFPATH%/plugins/textfield.swf" children="false" enabled="true" align="bottom" y="50"  width="200" height="36" vcenter="true"
+				border="false" background="true"  backgroundcolor="0x000000" backgroundalpha="0.7" roundedge="5"
+				css="text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:18px;" zorder="1" 
+				onout="set(shadow,0);if(layer[bar].state != name,stoptween(layer[bar].x);tween(layer[bar].x,get(layer[get(layer[bar].state)].x),0.5))" 			        
+				/>	
+		<action name="call_iframe">
+				delayedcall(startpic1,0.2,
+				callwith(layer[bg],set(visible,true);set(alpha,1);set(enabled,true));
+				callwith(layer[iframelayer],add_iframe(%1, 100%, 100%);set(y,20%);set(visible,true);set(alpha,0));
+				tween(layer[iframelayer].y,0,0.5);
+				tween(layer[iframelayer].alpha,1,0.3);
+				)
+		</action>	        
+		<action name="add_iframe" type="Javascript">
+				var iframe = document.createElement("iframe");
+				iframe.style.position = "absolute";
+				iframe.style.left = 0;
+				iframe.style.top = 0;
+				iframe.style.width = "100%";
+				iframe.style.height = "100%";
+				iframe.style.border = 0;
+				iframe.src = args[1];
+			    iframe.setAttribute('id',resolve(caller.name));
+				caller.registercontentsize(args[2], args[3]);
+				caller.sprite.appendChild(iframe);
+				caller.sprite.style.webkitOverflowScrolling = "touch";
+		        caller.sprite.style.overflowY = "auto";
+		        caller.sprite.style.overflowX = "auto";
+		</action>
+		<action name="remove_iframe" type="Javascript">
+				var lastIframe = document.getElementById('iframelayer');
+				lastIframe.parentNode.removeChild(lastIframe);
+		</action>
+		<action name="fadeout_iframe">
+				tween(layer[bg].alpha,0,0.5);
+				tween(layer[iframelayer].y,20%,0.5);
+				tween(layer[iframelayer].alpha,0,0.2);
+				tween(view.fov,80,0.5);
+				delayedcall(fadeout,0.5,remove_iframe();set(layer[iframelayer].visible,false);
+				set(layer[bg].visible,false);
+				set(layer[bg].enabled,false));
+				</action>
+		<style name="buttonstyle"  keep="true" url="img/product/s636772119310562754.jpg" children="false" enabled="true" align="center" y="50"  width="40" height="40" vcenter="true"
+				border="false" background="true"  backgroundcolor="0x000000" backgroundalpha="0.7" roundedge="5"
+				css="text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:18px;" zorder="1" 
+				onout="set(shadow,0);if(layer[bar].state != name,stoptween(layer[bar].x);tween(layer[bar].x,get(layer[get(layer[bar].state)].x),0.5))" 			        
+				/>
+		<!-- the 'tooltip' textfield -->
+		<layer name="tooltip" keep="true"
+				url="%SWFPATH%/plugins/textfield.swf"
+				parent="STAGE"
+				visible="false" alpha="0"
+				enabled="false"
+				align="lefttop"
+				edge="bottom"
+				oy="-25"
+				background="false" backgroundcolor="0xFFFFFF" backgroundalpha="1.0"
+				border="false" bordercolor="0x000000" borderalpha="1.0"
+				borderwidth="1.0" roundedge="0"
+				shadow="0.0" shadowrange="4.0" shadowangle="45" shadowcolor="0x000000" shadowalpha="1.0"
+				textshadow="1" textshadowrange="6.0" textshadowangle="90" textshadowcolor="0x000000" textshadowalpha="1.0"
+				css="text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:14px;"
+				html=""
+				/>
+
+		  <style name="hotspotstyle" url="img/ui/blank_100.png" scale="0.5" edge="top" oy="0" distorted="true" onloaded="add_all_the_time_tooltip();" />
+		  <action name="add_all_the_time_tooltip">
+			
+			txtadd(tooltipname, 'tooltip_', get(name));
+			
+			addplugin(get(tooltipname)); txtadd(plugin[get(tooltipname)].parent, 'hotspot[',get(name),']');
+			set(plugin[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+			set(plugin[get(tooltipname)].align,top); set(plugin[get(tooltipname)].edge,bottom);
+			set(plugin[get(tooltipname)].x,0); set(plugin[get(tooltipname)].y,0);
+			set(plugin[get(tooltipname)].autowidth,true); set(plugin[get(tooltipname)].autoheight,true);
+			set(plugin[get(tooltipname)].background,true); set(plugin[get(tooltipname)].border,false);set(plugin[get(tooltipname)].roundedge,5);set(plugin[get(tooltipname)].padding,6);
+			set(plugin[get(tooltipname)].backgroundcolor,0x61300b);set(plugin[get(tooltipname)].backgroundalpha,0.5);
+			set(plugin[get(tooltipname)].css,'text-align:center; color:#ffffff; font-family:Hiragino Sans GB; font-weight:regular; font-size:22px;');
+
+			copy(plugin[get(tooltipname)].html,hotspot[get(name)].tooltip);
+			set(plugin[get(tooltipname)].enabled,false);
+			set(plugin[get(tooltipname)].alpha,0);
+		  </action>
+	</scene>
+</krpano>
