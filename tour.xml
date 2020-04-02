@@ -162,13 +162,14 @@
 		
 		<!-- set(layer[skin_title_pr].visible, false); -->
 	</action>
-	<!--hotspot -->
+	<!--hotspot --><!-- onloaded="hotspot_animate();" -->
 	<style name="hotspot_ani_white"
 	       url="skin/hotspot_ani_white_40x40x20.png"
 	       crop="0|0|40|40"
 	       frames="20" framewidth="40" frameheight="40" frame="0"
-	       onloaded="hotspot_animate();"
+	       
 	       />
+
 	<action name="hotspot_animate">
 			if(loaded,
 				inc(frame,1,get(frames),0);
@@ -300,6 +301,11 @@
 				css="text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:14px;"
 				html=""
 				/>
+		<hotspot name="spot4" style="hotspotstyle" ath="-0.575" atv="-9.878" tooltip="绿植使空间灵动" />
+		<hotspot name="spot5" style="hotspotstyle" ath="18.268" atv="2.076" tooltip="预留拍照休息区" />
+		<hotspot name="spot6" style="hotspotstyle" ath="49.633" atv="-12.715" tooltip="充分包围柱子" />
+		<hotspot name="spot7" style="hotspotstyle" ath="-25.260" atv="-6.345" tooltip="冰箱" />
+		<hotspot name="spot8" style="hotspotstyle" ath="-100.498" atv="1.497" tooltip="预留开门空间" />
 
 		  <style name="hotspotstyle" url="img/ui/blank_100.png" scale="0.5" edge="top" oy="0" distorted="true" onloaded="add_all_the_time_tooltip();" />
 		  <action name="add_all_the_time_tooltip">
@@ -317,7 +323,8 @@
 
 			copy(plugin[get(tooltipname)].html,hotspot[get(name)].tooltip);
 			set(plugin[get(tooltipname)].enabled,false);
-			set(plugin[get(tooltipname)].alpha,0);
+			set(plugin[get(tooltipname)].alpha,1);
 		  </action>
+		
 	</scene>
 </krpano>
