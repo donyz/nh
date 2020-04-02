@@ -196,7 +196,7 @@
 	<layer name="logo" url="img/ui/kfz_white_100.png" align="lefttop" x="16" y="20" width="72" height="45" keep="true" enabled="false" children="false" scalechildren="true" destscale="1.0" />
 	<layer name="shownamebtn" url="img/ui/showname.png" align="righttop" x="16" y="20" width="50" height="30" keep="true" enabled="true" children="false" scalechildre="true" destscale="1.0" onclick="showname()"/>
 	<scene name="scene_vs" title="蒲缇烘焙屋" onstart="" thumburl="panos/vs.tiles/thumb.jpg" lat="" lng="" heading="">
-		<view hlookat="-30" vlookat="-0" fovtype="MFOV" fov="80" maxpixelzoom="1.0" mixpixelzoom="1.0" fovmin="65" fovmax="85" limitview="true" stereographic="false" vlookatmin="-10" vlookatmax="10"/>
+		<view hlookat="-30" vlookat="-0" fovtype="MFOV" fov="80" maxpixelzoom="1.0" mixpixelzoom="0.65" fovmin="65" fovmax="110" limitview="true" stereographic="false" vlookatmin="-10" vlookatmax="10"/>
 		<preview url="panos/vs.tiles/preview.jpg" />
 		<image>
 			<cube url="panos/vs.tiles/pano_%s.jpg" />
